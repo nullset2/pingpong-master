@@ -13,4 +13,9 @@ class LoggedGame < ActiveRecord::Base
     false
   end
 
+  def status
+    return "W" if self.user_score == 21
+    "L"
+  end
+
 end
