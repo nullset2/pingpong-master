@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Logged Games</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date played</th>
+      <th>User</th>
+      <th>Opponent</th>
+      <th>User score</th>
+      <th>Opponent score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @logged_games.each do |logged_game| %>
+      <tr>
+        <td><%= logged_game.date_played %></td>
+        <td><%= logged_game.user_id %></td>
+        <td><%= logged_game.opponent_id %></td>
+        <td><%= logged_game.user_score %></td>
+        <td><%= logged_game.opponent_score %></td>
+        <td><%= link_to 'Show', logged_game %></td>
+        <td><%= link_to 'Edit', edit_logged_game_path(logged_game) %></td>
+        <td><%= link_to 'Destroy', logged_game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Logged game', new_logged_game_path %>

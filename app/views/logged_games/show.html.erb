@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date played:</strong>
+  <%= @logged_game.date_played %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @logged_game.user_id %>
+</p>
+
+<p>
+  <strong>Opponent:</strong>
+  <%= @logged_game.opponent_id %>
+</p>
+
+<p>
+  <strong>User score:</strong>
+  <%= @logged_game.user_score %>
+</p>
+
+<p>
+  <strong>Opponent score:</strong>
+  <%= @logged_game.opponent_score %>
+</p>
+
+<%= link_to 'Edit', edit_logged_game_path(@logged_game) %> |
+<%= link_to 'Back', logged_games_path %>
