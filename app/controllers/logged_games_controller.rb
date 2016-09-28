@@ -16,11 +16,10 @@ class LoggedGamesController < ApplicationController
   end
 
   def create
-    @logged_game = LoggedGame.new(logged_game_params)
-    current_user.logged_games << @logged_game
-
-    if current_user.logged_games.save
-      redirect_to @logged_game, notice: 'Logged game was successfully created.'
+    @logged_game = current_user.logged_games.new(logged_game_params) 
+    
+    if @logged_game.save
+      redirect_to @logged_game, notice: 'The Game has been logged.'
     else
       render :new
     end
@@ -28,7 +27,7 @@ class LoggedGamesController < ApplicationController
 
   def update
     if @logged_game.update(logged_game_params)
-      redirect_to @logged_game, notice: 'Logged game was successfully updated.'
+      redirect_to @logged_game, notice: 'The Game has been updated.'
     else
       render :edit
     end
@@ -36,7 +35,7 @@ class LoggedGamesController < ApplicationController
 
   def destroy
     @logged_game.destroy
-    redirect_to logged_games_url, notice: 'Logged game was successfully destroyed.'
+    redirect_to logged_games_url, notice: 'This Game has been successfully destroyed.'
   end
 
   private
