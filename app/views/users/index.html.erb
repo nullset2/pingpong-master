@@ -1,0 +1,24 @@
+<h1>Leaderboard</h1>
+
+<table class = "table table-striped table-bordered">
+    <thead>
+        <tr>
+            <td>Rank</td>
+            <td>Name</td>
+            <td>Ranking</td>
+            <td>Games Played</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @users.each_with_index do |user, rank| %>
+            <tr>
+                <td><%= rank + 1 %></td>
+                <td><%= user.name %></td>
+                <td><%= user.ranking %></td>
+                <td><%= user.games_played %></td>
+            </tr>
+        <% end %>
+    </tbody>
+
+</table>

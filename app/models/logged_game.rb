@@ -1,4 +1,5 @@
 class LoggedGame < ActiveRecord::Base
+  after_create :update_player_rankings
   belongs_to :user
   belongs_to :opponent, class_name: "User"
 
@@ -11,6 +12,33 @@ class LoggedGame < ActiveRecord::Base
     return true if ((self.user_score - self.opponent_score).abs >= 2 ) && (self.user_score == 21 || self.opponent_score == 21)
     errors.add(:base, "Submitted scores are invalid, please check your input data")
     false
+  end
+
+  def status
+    return "W" if self.user_score == 21
+    "L"
+  end
+
+  def update_player_rankings
+    k_value = 32
+
+    player1 = User.find_by(id: self.user_id)
+    player2 = User.find_by(id: self.opponent_id)
+
+    player1_ranking = player1.ranking
+    player2_ranking = player2.ranking
+
+    self.status == "W" ? player1_result = 1 : player1_result = 0
+    player2_result = 1 - player1_result
+
+    player1_expectation = 1/(1+10**((player2_ranking - player1_ranking)/400.0))
+    player2_expectation = 1/(1+10**((player1_ranking - player2_ranking)/400.0))
+
+    player1.ranking = (player1_ranking + k_value * (player1_result - player1_expectation)).round
+    player2.ranking = (player2_ranking + k_value * (player2_result - player2_expectation)).round
+    
+    player1.save
+    player2.save
   end
 
 end
