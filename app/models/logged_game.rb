@@ -34,10 +34,11 @@ class LoggedGame < ActiveRecord::Base
     player1_expectation = 1/(1+10**((player2_ranking - player1_ranking)/400.0))
     player2_expectation = 1/(1+10**((player1_ranking - player2_ranking)/400.0))
 
-    self.user.ranking = (player1_ranking + k_value * (player1_result - player1_expectation)).round
-    self.opponent.ranking = (player2_ranking + k_value * (player2_result - player2_expectation)).round
-
-    byebug
+    player1.ranking = (player1_ranking + k_value * (player1_result - player1_expectation)).round
+    player2.ranking = (player2_ranking + k_value * (player2_result - player2_expectation)).round
+    
+    player1.save
+    player2.save
   end
 
 end
