@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
   validates :email, presence: true, format: { with: Devise.email_regexp }
-  validates :ranking, numericality: { greater_than_or_equal_to: 0 }
 
   def set_initial_ranking
     self.ranking = 0
@@ -16,6 +15,10 @@ class User < ActiveRecord::Base
 
   def compute_default_name
     self.name = self.email.split("@").first
+  end
+
+  def games_played
+    LoggedGame.where("user_id = #{self.id} or opponent_id = #{self.id}").all.count
   end
 
 end

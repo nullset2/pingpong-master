@@ -1,0 +1,24 @@
+<h1>Leaderboard</h1>
+
+<table>
+    <thead>
+        <tr>
+            <td>Rank</td>
+            <td>Name</td>
+            <td>Ranking</td>
+            <td>Games Played</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @users.each do |user| %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.name %></td>
+                <td><%= user.ranking %></td>
+                <td><%= user.games_played %></td>
+            </tr>
+        <% end %>
+    </tbody>
+
+</table>
