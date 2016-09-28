@@ -16,12 +16,8 @@
     <%= f.date_select :date_played, order: [:month, :day, :year] %>
   </div>
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
     <%= f.label :opponent_id %><br>
-    <%= f.number_field :opponent_id %>
+    <%= f.collection_select :opponent_id, User.all_except(current_user).order(:name), :id, :name %>
   </div>
   <div class="field">
     <%= f.label :your_score %><br>
