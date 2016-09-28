@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :date_played %><br>
-    <%= f.date_select :date_played %>
+    <%= f.date_select :date_played, order: [:month, :day, :year] %>
   </div>
   <div class="field">
     <%= f.label :user_id %><br>
