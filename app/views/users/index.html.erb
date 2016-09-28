@@ -11,9 +11,9 @@
     </thead>
 
     <tbody>
-        <% @users.each do |user| %>
+        <% @users.order(:ranking).each_with_index do |user, rank| %>
             <tr>
-                <td><%= user.id %></td>
+                <td><%= rank + 1 %></td>
                 <td><%= user.name %></td>
                 <td><%= user.ranking %></td>
                 <td><%= user.games_played %></td>
