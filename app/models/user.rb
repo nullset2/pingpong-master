@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  before_validation :set_initial_ranking
+  before_validation :set_ranking
   before_validation :compute_default_name
 
   scope :all_except, ->(u) { where.not(id: u) }
@@ -8,9 +8,10 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
   validates :email, presence: true, format: { with: Devise.email_regexp }
+  validates :ranking, presence: true, numericality: true
 
-  def set_initial_ranking
-    self.ranking = 0
+  def set_ranking
+    self.ranking ||=  0
   end
 
   def compute_default_name
